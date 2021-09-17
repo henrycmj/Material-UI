@@ -42,3 +42,48 @@
 
 ## Icons
 - There are over 1780 icons that can be used for various functionality purpose and easy identification purpose for the user. It includes arrows, figures, cars, locations icons, and many others.
+- You can inset an Icon inside the button, either at the end or begining of the button (inside)
+- <button startIcon={<sendIcon />}> or <button endIcon={<sendIcon />}>
+
+## Custom Styling - Makestylrd hook(custom css)
+- First import the makestyles from the core (import { makeStyles } from "@material-ui/core";)
+- Then make the folloing:
+const useStyles = makeStyles({
+    btn:{
+        color:"red",
+    },
+})
+- After doing so, involve the variable as classes in the main returm class:
+const classes = useStyles();
+- After that, you can use the attribute "className={classes.<name of class>}" to edit the css of that class.
+- The hover effect can be done within that same class the edit is being done:
+'&: hover':{
+    color:'blue',
+}
+## Custom Themes
+- First import the theme variants(import { createMuiTheme, ThemeProvider } from "@material-ui/core";). The import is only done in the main js file that routes all components(App.js)
+- createMuiTheme =  is used to create a custom theme object
+- ThemeProvider is used to wrap all routers in the App.js file the override the actual material-ui fonts, colors, e.t.c.
+- Create a constance of the theme and navigate to the theme types of the material-ui that you want to override.
+ const theme = createMuiTheme({
+    ...navigate: eg:
+    palette:{
+        primary:{
+            main:'#fff'
+        }
+    }
+})
+- The wrap themall in the router with the variant ThemePriver:
+<ThemeProvider theme={theme}>
+    <Router>...</Router>
+<ThemeProvider>
+
+## Text Fields (Form Inputs)
+- There are three of inputs you can call on variant attribute
+        * Standard
+        * Outline
+        * Filled
+- Naming the placeholder, you can say (label="')
+- Naming the input type, you can say (variant="")
+- If you want to make the textfield larger, use the attribute multiline and specify the number of rows you want to take up:
+<TextField multiline rows={2} />
