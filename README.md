@@ -5,15 +5,15 @@
 - By default, the output is a paragraphy
 - You need to specify the variant type of the output text by using the folowing attributes:
 
-    // variant="h1" color="primary"  - Header tag h1
-    // variant="h2" color="primary"  - Header tag h2
-    // variant="subtitle1" - Subheader 1
-    // variant="subtitle2" - Subheader 1
-    // variant="body1" - Paragraphy 1
-    // variant="body2" - Paragraphy 2
-    // variant="button" display="block"  - button text
-    // variant="caption" display="block"  - caption text
-    // variant="overline" display="block"  - overline text
+    1. variant="h1" color="primary"  - Header tag h1
+    2. variant="h2" color="primary"  - Header tag h2
+    3. variant="subtitle1" - Subheader 1
+    4. variant="subtitle2" - Subheader 1
+    5. variant="body1" - Paragraphy 1
+    6. variant="body2" - Paragraphy 2
+    7. variant="button" display="block"  - button text
+    8. variant="caption" display="block"  - caption text
+    9. variant="overline" display="block"  - overline text
 - Coloring can be done by using the color attribute:
     = color="primary" or "secondary"
     = color="textPrimary" or "textSecondary"
