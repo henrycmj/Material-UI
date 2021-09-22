@@ -1,10 +1,15 @@
-import React, {useState} from "react";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core";
+import React, { useState } from "react"
+import Typography from "@material-ui/core/Typography"
+import Button from "@material-ui/core/Button"
+import Container from "@material-ui/core/Container"
+import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight"
+import TextField from "@material-ui/core/TextField"
+import { FormControlLabel, makeStyles } from "@material-ui/core"
+import Radio from "@material-ui/core/Radio"
+import RadioGroup from "@material-ui/core/RadioGroup"
+import FormControl from "@material-ui/core/FormControl"
+import FormLabel from "@material-ui/core/FormLabel"
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles({
   field: {
@@ -16,25 +21,36 @@ const useStyles = makeStyles({
 
 export default function Notes() {
   const classes = useStyles();
-
-  const [title, setTitle] = useState('');
-  const [details, setDetails] = useState('');
+  const history = useHistory();
+  // TITLE INPUT STATES
+  const [title, setTitle] = useState("");
+  const [details, setDetails] = useState("");
   // ERROR STATES
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
+  // CATEGORY FOR THE RADIO BUTTONS
+  const [category, setCategory] = useState("todos");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTitleError(false)
-    setDetailsError(false)
+    setTitleError(false);
+    setDetailsError(false);
 
-    if(title === ''){setTitleError(true)}
-    if(details === ''){setDetailsError(true)}
+    if (title === "") {
+      setTitleError(true);
+    }
+    if (details === "") {
+      setDetailsError(true);
+    }
 
     if (title && details) {
-      console.log(title, details);
+      fetch('http://localhost:8000/notes', {
+        method: 'POST',
+        headers: {"Content-type": "application/json"},
+        body: JSON.stringify({ title, details, category})
+      }).then(() => history.push('/'))
     }
-  };
+  }
 
   return (
     <Container>
@@ -64,6 +80,22 @@ export default function Notes() {
           rows={4}
           error={detailsError}
         />
+        <FormControl className={classes.field}>
+        <FormLabel>Note Category</FormLabel>
+        <RadioGroup
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}>
+          <FormControlLabel value="money" control={<Radio />} label="Money" />
+          <FormControlLabel value="todos" control={<Radio />} label="Todos" />
+          <FormControlLabel
+            value="reminders"
+            control={<Radio />}
+            label="Reminder"
+          />
+          <FormControlLabel value="work" control={<Radio />} label="Work" />
+        </RadioGroup>
+        </FormControl>
+
 
         <Button
           type="submit"
